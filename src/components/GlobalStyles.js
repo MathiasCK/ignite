@@ -14,6 +14,9 @@ const GlobalStyles = createGlobalStyle`
             background-color: darkgrey;
             border-radius: 2rem;
         }
+        &::-webkit-scrollbar-track {
+    background: white;
+  }
     }
     body {
         font-family: 'Montserrat', sans-serif;
