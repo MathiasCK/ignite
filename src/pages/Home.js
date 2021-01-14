@@ -8,7 +8,13 @@ import styled from "styled-components";
 import Game from "../components/Game";
 import GameDetail from "../components/GameDetail";
 
+import { useLocation } from "react-router-dom";
+
 const Home = () => {
+  // Get the current Location
+  const location = useLocation();
+  const pathId = location.pathname.split("/"); // Splits After / Into Array
+  const gameDetail = useSelector((state) => state.detail.game.name);
   // Fetch Games
   const dispatch = useDispatch();
   useEffect(() => {
@@ -22,7 +28,7 @@ const Home = () => {
 
   return (
     <GameList>
-      <GameDetail />
+      {gameDetail && <GameDetail />}
       <h2>Upcoming Games</h2>
       <Games>
         {upcomingGames.map((game) => (
