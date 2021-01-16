@@ -9,12 +9,13 @@ import Game from "../components/Game";
 import GameDetail from "../components/GameDetail";
 
 import { useLocation } from "react-router-dom";
+import { fadeIn } from "../animations";
 
 const Home = () => {
   // Get the current Location
 
   const location = useLocation();
-  const gameDetail = useSelector((state) => state.detail.game.name);
+  //const gameDetail = useSelector((state) => state.detail.game.name);
   // Fetch Games
   const dispatch = useDispatch();
   useEffect(() => {
@@ -27,14 +28,14 @@ const Home = () => {
   );
 
   return (
-    <GameList>
+    <GameList variants={fadeIn} initial="hidden" animate="show">
       <AnimateSharedLayout type="crossfade">
         <AnimatePresence>
           {pathId && <GameDetail pathId={pathId} />}
         </AnimatePresence>
-        {searched.length ? (
+        {searched.length ? ( // Because Of Array
           <div className="searched">
-            <h2>Search Results for:</h2>
+            <h2>Showing Results for: {}</h2>
             <Games>
               {searched.map((game) => (
                 <Game

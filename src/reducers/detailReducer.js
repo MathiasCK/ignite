@@ -6,6 +6,8 @@ const initialState = {
     results: [],
   },
   isLoading: true,
+  developer: [],
+  genres: [],
 };
 
 const detailReducer = (state = initialState, action) => {
@@ -16,6 +18,8 @@ const detailReducer = (state = initialState, action) => {
         game: action.payload.game,
         screen: action.payload.screen,
         isLoading: false,
+        developer: action.payload.developer,
+        genres: action.payload.genres,
       };
     case "LOADING_DETAIL":
       return {

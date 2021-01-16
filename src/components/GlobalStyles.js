@@ -27,12 +27,13 @@ const GlobalStyles = createGlobalStyle`
         font-size: 3rem;
         font-family: 'Abril Fatface', cursive;
         font-weight: lighter;
-        //color: #ff7676;
+        color: #ff7676;
     }
     h3 {
         font-size: 1.3rem;
         color: #333;
         padding: 1.5rem 0;
+        
     }
     p {
         font-size: 1.2rem;
@@ -49,6 +50,9 @@ const GlobalStyles = createGlobalStyle`
     input {
         font-weight: bold;
         font-family: "Montserrat", sans-serif;
+    }
+    svg {
+        color: #ff7676;
     }
 `;
 

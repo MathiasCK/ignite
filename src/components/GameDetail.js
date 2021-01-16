@@ -32,7 +32,9 @@ const GameDetail = ({ pathId }) => {
     }
   };
   // Data
-  const { screen, game, isLoading } = useSelector((state) => state.detail);
+  const { screen, game, isLoading, developer, genres } = useSelector(
+    (state) => state.detail
+  );
 
   // Display Platform Svg
   const getPlatform = (platform) => {
@@ -103,6 +105,7 @@ const GameDetail = ({ pathId }) => {
                 </Platforms>
               </Info>
             </Stats>
+
             <Media>
               <motion.img
                 layoutId={`image ${pathId}`}
@@ -122,12 +125,45 @@ const GameDetail = ({ pathId }) => {
                 />
               ))}
             </Gallery>
+            <Stats className="small">
+              <Information>
+                <h3>Developers:</h3>
+                {developer.map((dev) => (
+                  <a>{dev.name}</a>
+                ))}
+              </Information>
+              <Information>
+                <h3>Genres:</h3>
+                <Genres>
+                  {genres.map((genre) => (
+                    <p>{genre.name}</p>
+                  ))}
+                </Genres>
+              </Information>
+            </Stats>
           </Detail>
         </CardShadow>
       )}
     </>
   );
 };
+
+const Information = styled(motion.div)`
+  margin-top: 2rem;
+  a {
+    font-size: 1.2rem;
+    line-height: 200%;
+    margin-right: 0.5rem;
+  }
+  p {
+    margin-right: 0.5rem;
+  }
+`;
+
+const Genres = styled(motion.div)`
+  display: flex;
+  color: red;
+`;
 
 const CardShadow = styled(motion.div)`
   width: 100%;
@@ -202,8 +238,13 @@ const Gallery = styled(motion.div)`
   min-height: 10vh;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
+  img {
+    max-height: 300px;
+    object-fit: cover;
+  }
 `;
 
 export default GameDetail;

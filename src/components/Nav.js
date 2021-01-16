@@ -6,6 +6,7 @@ import styled from "styled-components";
 // Redux and routes
 import { fetchSearch } from "../actions/gamesActions";
 import { useDispatch } from "react-redux";
+import { fadeIn } from "../animations";
 
 const Nav = () => {
   const dispatch = useDispatch();
@@ -27,65 +28,52 @@ const Nav = () => {
     });
   };
   return (
-    <StyledNav>
+    <StyledNav variants={fadeIn} initial="hidden" animate="show">
       <Logo onClick={clearSearch}>
         <img src={logo} alt="logo" />
         <h1>Ignite</h1>
       </Logo>
-      <Search>
-        <input
-          placeholder="Search for games"
-          value={textInput}
-          type="text"
-          onChange={inputHandler}
-        />
-        <span class="border"></span>
-        <button type="submit" onClick={submitSearch}>
-          Search
-        </button>
-      </Search>
+      <input
+        placeholder="Search for games"
+        value={textInput}
+        type="text"
+        onChange={inputHandler}
+      />
+      <span class="border"></span>
+      <button type="submit" onClick={submitSearch}>
+        Search
+      </button>
     </StyledNav>
   );
 };
 
-const Search = styled(motion.form)`
-  position: relative;
-`;
-
 const StyledNav = styled(motion.nav)`
-  padding: 3rem 5rem;
+  /*position: fixed;
+  width: 100%;
+  backdrop-filter: saturate(180%) blur(5px);
+  opacity: 0.9;
+  z-index: 100;*/
+  padding: 1rem 2rem 5rem;
   text-align: center;
+  background: white;
   input {
     width: 30%;
     font-size: 1.5rem;
-    padding: 0.5rem;
+    padding: 1rem;
     border: none;
     margin-top: 1rem;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
     outline: none;
-    position: relative;
     &::placeholder {
       font-size: medium;
       font-family: inherit;
-    }
-    & ~ .border {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background-color: #ff7676;
-    }
-    &:focus ~ .border {
-      width: 100%;
-      transition: 0.5s;
     }
   }
   button {
     font-size: 1.5rem;
     border: 1px solid #ff7676;
-    padding: 0.25rem 2rem;
-    margin: 0 1rem;
+    padding: 1rem;
+    margin: 1rem;
     cursor: pointer;
     background: white;
     color: black;
@@ -97,6 +85,24 @@ const StyledNav = styled(motion.nav)`
     }
   }
 `;
+
+/*const Input = styled(motion.div)`
+  background: red;
+  width: 100%;
+  position: relative;
+  & ~ .border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ff7676;
+  }
+  &:focus ~ .border {
+    width: 100%;
+    transition: 0.5s;
+  }
+`;*/
 
 const Logo = styled(motion.div)`
   display: flex;

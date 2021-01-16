@@ -14,6 +14,8 @@ const loadDetail = (id) => async (dispatch) => {
     payload: {
       game: detailData.data,
       screen: screenShotData.data,
+      developer: detailData.data.developers,
+      genres: detailData.data.genres,
     },
   });
 };
