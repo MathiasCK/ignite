@@ -22,6 +22,11 @@ const detailReducer = (state = initialState, action) => {
         ...state,
         isLoading: true,
       };
+    case "REMOVE_DETAIL":
+      return {
+        ...state,
+        game: initialState.game,
+      };
     default: {
       return { ...state };
     }

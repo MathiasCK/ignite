@@ -22,7 +22,7 @@ const Home = () => {
   }, [dispatch]);
   const pathId = location.pathname.split("/")[2]; // Splits After / Into Array
   // Display Data
-  const { popularGames, newGames, upcomingGames } = useSelector(
+  const { popularGames, newGames, upcomingGames, searched } = useSelector(
     (state) => state.games
   );
 
@@ -30,8 +30,26 @@ const Home = () => {
     <GameList>
       <AnimateSharedLayout type="crossfade">
         <AnimatePresence>
-          {gameDetail && <GameDetail pathId={pathId} />}
+          {pathId && <GameDetail pathId={pathId} />}
         </AnimatePresence>
+        {searched.length ? (
+          <div className="searched">
+            <h2>Search Results for:</h2>
+            <Games>
+              {searched.map((game) => (
+                <Game
+                  name={game.name}
+                  released={game.released}
+                  id={game.id}
+                  image={game.background_image}
+                  key={game.id}
+                />
+              ))}
+            </Games>
+          </div>
+        ) : (
+          ""
+        )}
         <h2>Upcoming Games</h2>
         <Games>
           {upcomingGames.map((game) => (

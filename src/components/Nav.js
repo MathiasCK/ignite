@@ -1,25 +1,54 @@
 import logo from "../img/logo.svg";
 import { motion } from "framer-motion";
-import React from "react";
+import { React, useState } from "react";
 import styled from "styled-components";
 
+// Redux and routes
+import { fetchSearch } from "../actions/gamesActions";
+import { useDispatch } from "react-redux";
+
 const Nav = () => {
+  const dispatch = useDispatch();
+  const [textInput, setTextInput] = useState("");
+
+  const inputHandler = (e) => {
+    setTextInput(e.target.value);
+  };
+
+  const submitSearch = (e) => {
+    e.preventDefault();
+    dispatch(fetchSearch(textInput));
+    setTextInput("");
+  };
+
+  const clearSearch = () => {
+    dispatch({
+      type: "CLEAR_SEARCHED",
+    });
+  };
   return (
     <StyledNav>
-      <Logo>
+      <Logo onClick={clearSearch}>
         <img src={logo} alt="logo" />
         <h1>Ignite</h1>
       </Logo>
       <Search>
-        <input type="text" />
+        <input
+          placeholder="Search for games"
+          value={textInput}
+          type="text"
+          onChange={inputHandler}
+        />
         <span class="border"></span>
-        <button>Search</button>
+        <button type="submit" onClick={submitSearch}>
+          Search
+        </button>
       </Search>
     </StyledNav>
   );
 };
 
-const Search = styled(motion.div)`
+const Search = styled(motion.form)`
   position: relative;
 `;
 
@@ -35,6 +64,10 @@ const StyledNav = styled(motion.nav)`
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
     outline: none;
     position: relative;
+    &::placeholder {
+      font-size: medium;
+      font-family: inherit;
+    }
     & ~ .border {
       position: absolute;
       bottom: 0;

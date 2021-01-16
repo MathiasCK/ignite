@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
@@ -18,8 +18,11 @@ import gamepad from "../img/gamepad.svg";
 import starEmpty from "../img/star-empty.png";
 import starFull from "../img/star-full.png";
 
+import { useDispatch } from "react-redux";
+
 const GameDetail = ({ pathId }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
   // Exit Detail
   const exitDetailHandler = (e) => {
     const element = e.target;
@@ -64,6 +67,14 @@ const GameDetail = ({ pathId }) => {
     }
     return stars;
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch({
+        type: "REMOVE_DETAIL",
+      });
+    };
+  }, []);
 
   return (
     <>
