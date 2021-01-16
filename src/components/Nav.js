@@ -12,11 +12,16 @@ const Nav = () => {
       </Logo>
       <Search>
         <input type="text" />
+        <span class="border"></span>
         <button>Search</button>
       </Search>
     </StyledNav>
   );
 };
+
+const Search = styled(motion.div)`
+  position: relative;
+`;
 
 const StyledNav = styled(motion.nav)`
   padding: 3rem 5rem;
@@ -29,6 +34,19 @@ const StyledNav = styled(motion.nav)`
     margin-top: 1rem;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
     outline: none;
+    position: relative;
+    & ~ .border {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #ff7676;
+    }
+    &:focus ~ .border {
+      width: 100%;
+      transition: 0.5s;
+    }
   }
   button {
     font-size: 1.5rem;
@@ -54,7 +72,5 @@ const Logo = styled(motion.div)`
   cursor: pointer;
   color: #ff7676;
 `;
-
-const Search = styled(motion.div)``;
 
 export default Nav;
