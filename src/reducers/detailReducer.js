@@ -8,6 +8,9 @@ const initialState = {
   isLoading: true,
   developer: [],
   genres: [],
+  website: "",
+  background_image: "",
+  background_image_additional: "",
 };
 
 const detailReducer = (state = initialState, action) => {
@@ -20,6 +23,8 @@ const detailReducer = (state = initialState, action) => {
         isLoading: false,
         developer: action.payload.developer,
         genres: action.payload.genres,
+        website: action.payload.website,
+        background_image_additional: action.payload.background_image_additional,
       };
     case "LOADING_DETAIL":
       return {

@@ -32,9 +32,16 @@ const GameDetail = ({ pathId }) => {
     }
   };
   // Data
-  const { screen, game, isLoading, developer, genres } = useSelector(
-    (state) => state.detail
-  );
+  const {
+    screen,
+    game,
+    isLoading,
+    developer,
+    genres,
+    website,
+    background_image_additional,
+    background_image,
+  } = useSelector((state) => state.detail);
 
   // Display Platform Svg
   const getPlatform = (platform) => {
@@ -92,6 +99,9 @@ const GameDetail = ({ pathId }) => {
                 <p>Rating: {game.rating}</p>
                 {getStars()}
               </div>
+              <a href={game.website} target="_blank">
+                {game.website}
+              </a>
               <Info>
                 <h3>Platforms:</h3>
                 <Platforms>
@@ -135,12 +145,11 @@ const GameDetail = ({ pathId }) => {
               <Information>
                 <h3>Genres:</h3>
                 <Genres>
-                  {genres.map((genre) => (
-                    <p>{genre.name}</p>
-                  ))}
+                  {genres && genres.map((genre) => <p>{genre.name}</p>)}
                 </Genres>
               </Information>
             </Stats>
+            <motion.img src={game.background_image_additional}></motion.img>
           </Detail>
         </CardShadow>
       )}
@@ -246,5 +255,16 @@ const Gallery = styled(motion.div)`
     object-fit: cover;
   }
 `;
+
+/*const DisplayImg = styled(motion.div)`
+  background-image: url("${({ src }) => src}");
+  will-change: background-image;
+  ${({ src1 }) =>
+    src1
+      ? `&:hover {
+		background-image: url('${src1}');
+	}`
+      : ""};
+`;*/
 
 export default GameDetail;

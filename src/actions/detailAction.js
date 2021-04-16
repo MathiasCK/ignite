@@ -16,6 +16,9 @@ const loadDetail = (id) => async (dispatch) => {
       screen: screenShotData.data,
       developer: detailData.data.developers,
       genres: detailData.data.genres,
+      website: detailData.data.website,
+      background_1: detailData.data.background_image,
+      background_2: detailData.data.background_image_additional,
     },
   });
 };

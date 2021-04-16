@@ -1,6 +1,6 @@
 import logo from "../img/logo.svg";
 import { motion } from "framer-motion";
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import styled from "styled-components";
 
 // Redux and routes
@@ -8,8 +8,11 @@ import { fetchSearch } from "../actions/gamesActions";
 import { useDispatch } from "react-redux";
 import { fadeIn } from "../animations";
 
-const Nav = () => {
+import useDebounce from "../hooks/useDebounce";
+
+const Nav = ({ setSearch }) => {
   const dispatch = useDispatch();
+
   const [textInput, setTextInput] = useState("");
 
   const inputHandler = (e) => {
@@ -19,6 +22,7 @@ const Nav = () => {
   const submitSearch = (e) => {
     e.preventDefault();
     dispatch(fetchSearch(textInput));
+    setSearch(textInput);
     setTextInput("");
   };
 
@@ -57,7 +61,7 @@ const StyledNav = styled(motion.nav)`
   text-align: center;
   background: white;
   input {
-    width: 30%;
+    width: 80%;
     font-size: 1.5rem;
     padding: 1rem;
     border: none;
@@ -67,6 +71,9 @@ const StyledNav = styled(motion.nav)`
     &::placeholder {
       font-size: medium;
       font-family: inherit;
+    }
+    @media screen and (min-width: 1400px) {
+      width: 30%;
     }
   }
   button {

@@ -9,11 +9,10 @@ import Game from "../components/Game";
 import GameDetail from "../components/GameDetail";
 
 import { useLocation } from "react-router-dom";
-import { fadeIn } from "../animations";
+import { fadeIn, titleAnim, scrollReveal } from "../animations";
 
-const Home = () => {
+const Home = ({ search }) => {
   // Get the current Location
-
   const location = useLocation();
   //const gameDetail = useSelector((state) => state.detail.game.name);
   // Fetch Games
@@ -35,7 +34,10 @@ const Home = () => {
         </AnimatePresence>
         {searched.length ? ( // Because Of Array
           <div className="searched">
-            <h2>Showing Results for: {}</h2>
+            <motion.h2 variants={titleAnim} initial="hidden" animate="show">
+              Showing Results for: '{search}'
+            </motion.h2>
+
             <Games>
               {searched.map((game) => (
                 <Game
@@ -51,7 +53,9 @@ const Home = () => {
         ) : (
           ""
         )}
-        <h2>Upcoming Games</h2>
+        <motion.h2 variants={titleAnim} initial="hidden" animate="show">
+          Upcoming Games
+        </motion.h2>
         <Games>
           {upcomingGames.map((game) => (
             <Game
@@ -75,6 +79,7 @@ const Home = () => {
             />
           ))}
         </Games>
+
         <h2>New Games</h2>
         <Games>
           {newGames.map((game) => (
