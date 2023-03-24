@@ -1,25 +1,23 @@
 import logo from "../img/logo.svg";
-import { motion } from "framer-motion";
-import { React, useEffect, useState } from "react";
+import {motion} from "framer-motion";
+import {React, useState} from "react";
 import styled from "styled-components";
 
 // Redux and routes
-import { fetchSearch } from "../actions/gamesActions";
-import { useDispatch } from "react-redux";
-import { fadeIn } from "../animations";
+import {fetchSearch} from "../actions/gamesActions";
+import {useDispatch} from "react-redux";
+import {fadeIn} from "../animations";
 
-import useDebounce from "../hooks/useDebounce";
-
-const Nav = ({ setSearch }) => {
+const Nav = ({setSearch}) => {
   const dispatch = useDispatch();
 
   const [textInput, setTextInput] = useState("");
 
-  const inputHandler = (e) => {
+  const inputHandler = e => {
     setTextInput(e.target.value);
   };
 
-  const submitSearch = (e) => {
+  const submitSearch = e => {
     e.preventDefault();
     dispatch(fetchSearch(textInput));
     setSearch(textInput);

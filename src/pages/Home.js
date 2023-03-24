@@ -1,17 +1,17 @@
-import { React, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { loadGames } from "../actions/gamesActions";
-import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
+import {React, useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {loadGames} from "../actions/gamesActions";
+import {motion, AnimatePresence, AnimateSharedLayout} from "framer-motion";
 import styled from "styled-components";
 
 // Components
 import Game from "../components/Game";
 import GameDetail from "../components/GameDetail";
 
-import { useLocation } from "react-router-dom";
-import { fadeIn, titleAnim, scrollReveal } from "../animations";
+import {useLocation} from "react-router-dom";
+import {fadeIn, titleAnim} from "../animations";
 
-const Home = ({ search }) => {
+const Home = ({search}) => {
   // Get the current Location
   const location = useLocation();
   //const gameDetail = useSelector((state) => state.detail.game.name);
@@ -22,8 +22,8 @@ const Home = ({ search }) => {
   }, [dispatch]);
   const pathId = location.pathname.split("/")[2]; // Splits After / Into Array
   // Display Data
-  const { popularGames, newGames, upcomingGames, searched } = useSelector(
-    (state) => state.games
+  const {popularGames, newGames, upcomingGames, searched} = useSelector(
+    state => state.games,
   );
 
   return (
@@ -39,7 +39,7 @@ const Home = ({ search }) => {
             </motion.h2>
 
             <Games>
-              {searched.map((game) => (
+              {searched.map(game => (
                 <Game
                   name={game.name}
                   released={game.released}
@@ -57,7 +57,7 @@ const Home = ({ search }) => {
           Upcoming Games
         </motion.h2>
         <Games>
-          {upcomingGames.map((game) => (
+          {upcomingGames.map(game => (
             <Game
               name={game.name}
               released={game.released}
@@ -69,7 +69,7 @@ const Home = ({ search }) => {
         </Games>
         <h2>Popular Games</h2>
         <Games>
-          {popularGames.map((game) => (
+          {popularGames.map(game => (
             <Game
               name={game.name}
               released={game.released}
@@ -82,7 +82,7 @@ const Home = ({ search }) => {
 
         <h2>New Games</h2>
         <Games>
-          {newGames.map((game) => (
+          {newGames.map(game => (
             <Game
               name={game.name}
               released={game.released}

@@ -1,10 +1,11 @@
-import { useEffect } from "react";
-import { motion } from "framer-motion";
+/* eslint-disable react/jsx-no-target-blank */
+import {useEffect} from "react";
+import {motion} from "framer-motion";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { smallImage } from "../utils";
-import { Helmet } from "react-helmet";
+import {useSelector} from "react-redux";
+import {useHistory} from "react-router-dom";
+import {smallImage} from "../utils";
+import {Helmet} from "react-helmet";
 
 // Platform SVG
 import playstation from "../img/playstation.svg";
@@ -18,13 +19,13 @@ import gamepad from "../img/gamepad.svg";
 import starEmpty from "../img/star-empty.png";
 import starFull from "../img/star-full.png";
 
-import { useDispatch } from "react-redux";
+import {useDispatch} from "react-redux";
 
-const GameDetail = ({ pathId }) => {
+const GameDetail = ({pathId}) => {
   const history = useHistory();
   const dispatch = useDispatch();
   // Exit Detail
-  const exitDetailHandler = (e) => {
+  const exitDetailHandler = e => {
     const element = e.target;
     if (element.classList.contains("shadow")) {
       document.body.style.overflow = "auto"; // Adds Scroll Back
@@ -32,19 +33,12 @@ const GameDetail = ({ pathId }) => {
     }
   };
   // Data
-  const {
-    screen,
-    game,
-    isLoading,
-    developer,
-    genres,
-    website,
-    background_image_additional,
-    background_image,
-  } = useSelector((state) => state.detail);
+  const {screen, game, isLoading, developer, genres} = useSelector(
+    state => state.detail,
+  );
 
   // Display Platform Svg
-  const getPlatform = (platform) => {
+  const getPlatform = platform => {
     switch (platform) {
       case "PlayStation 4":
         return playstation;
@@ -83,6 +77,7 @@ const GameDetail = ({ pathId }) => {
         type: "REMOVE_DETAIL",
       });
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -105,7 +100,7 @@ const GameDetail = ({ pathId }) => {
               <Info>
                 <h3>Platforms:</h3>
                 <Platforms>
-                  {game.platforms.map((data) => (
+                  {game.platforms.map(data => (
                     <img
                       alt={data.platform.name}
                       key={data.platform.id}
@@ -127,7 +122,7 @@ const GameDetail = ({ pathId }) => {
               <p>{game.description_raw}</p>
             </Description>
             <Gallery>
-              {screen.results.map((screen) => (
+              {screen.results.map(screen => (
                 <img
                   src={smallImage(screen.image, 1280)}
                   key={screen.id}
@@ -138,14 +133,15 @@ const GameDetail = ({ pathId }) => {
             <Stats className="small">
               <Information>
                 <h3>Developers:</h3>
-                {developer.map((dev) => (
+                {developer.map(dev => (
+                  // eslint-disable-next-line jsx-a11y/anchor-is-valid
                   <a>{dev.name}</a>
                 ))}
               </Information>
               <Information>
                 <h3>Genres:</h3>
                 <Genres>
-                  {genres && genres.map((genre) => <p>{genre.name}</p>)}
+                  {genres && genres.map(genre => <p>{genre.name}</p>)}
                 </Genres>
               </Information>
             </Stats>
